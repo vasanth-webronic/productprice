@@ -19,7 +19,7 @@ export function calcDiscount(price: string, regular: string): number | null {
 
 /** Fetch nearby stores within SEARCH_RADIUS_KM */
 export async function fetchNearbyStores(lat: number, lon: number): Promise<Store[]> {
-  const url = `/productprice/api/proxy/v1/stores?lat=${lat}&lon=${lon}`;
+  const url = `/api/proxy/v1/stores?lat=${lat}&lon=${lon}`;
   const res = await fetch(url, { next: { revalidate: 300 } });
   if (!res.ok) throw new Error(`Stores API error: ${res.status}`);
   const all: Store[] = await res.json();
@@ -35,7 +35,7 @@ export async function fetchStoreOffers(
   storeImageUrl: string,
   distanceKm: string
 ): Promise<Offer[]> {
-  const url = `/productprice/api/proxy/v1/stores/${storeKey}/offers?lat=${lat}&lon=${lon}&limit=${OFFERS_LIMIT_PER_STORE}`;
+  const url = `/api/proxy/v1/stores/${storeKey}/offers?lat=${lat}&lon=${lon}&limit=${OFFERS_LIMIT_PER_STORE}`;
   const res = await fetch(url, { next: { revalidate: 300 } });
   if (!res.ok) return [];
   const data: StoreOffersResponse = await res.json();

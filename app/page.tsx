@@ -10,7 +10,7 @@ import { SEARCH_RADIUS_KM, OFFERS_LIMIT_PER_STORE } from "@/lib/config";
 import { calcDiscount } from "@/lib/api";
 
 async function fetchNearbyStores(lat: number, lon: number): Promise<Store[]> {
-  const res = await fetch(`/productprice/api/proxy/v1/stores?lat=${lat}&lon=${lon}`);
+  const res = await fetch(`/api/proxy/v1/stores?lat=${lat}&lon=${lon}`);
   if (!res.ok) throw new Error(`Stores fetch failed: ${res.status}`);
   const all: Store[] = await res.json();
   return all.filter((s) => parseFloat(s.dist) <= SEARCH_RADIUS_KM);
@@ -21,7 +21,7 @@ async function fetchStoreOffers(
   lat: number,
   lon: number
 ): Promise<Offer[]> {
-  const url = `/productprice/api/proxy/v1/stores/${store.key}/offers?lat=${lat}&lon=${lon}&limit=${OFFERS_LIMIT_PER_STORE}`;
+  const url = `/api/proxy/v1/stores/${store.key}/offers?lat=${lat}&lon=${lon}&limit=${OFFERS_LIMIT_PER_STORE}`;
   const res = await fetch(url);
   if (!res.ok) return [];
   const data = await res.json();
