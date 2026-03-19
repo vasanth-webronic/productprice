@@ -5,8 +5,8 @@ export const SEARCH_RADIUS_KM = 10;
 // Max number of offers to fetch per store (matpriskollen supports up to ~200)
 export const OFFERS_LIMIT_PER_STORE = 100;
 
-// Base URL of the upstream matpriskollen API
-export const UPSTREAM_BASE = "https://matpriskollen.se";
+// Base URL — proxied through Next.js rewrites to avoid CORS
+export const UPSTREAM_BASE = "";
 
 // Categories (Swedish → English label)
 export const CATEGORIES: Record<string, string> = {
